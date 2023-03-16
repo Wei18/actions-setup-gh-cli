@@ -12,9 +12,10 @@ To install the gh cli, use the actions as below:
       steps:
         - uses: actions/checkout@v2
         - name: Install the gh cli
-          uses: ksivamuthu/actions-setup-gh-cli@v1
+          uses: Wei18/actions-setup-gh-cli@1.0.1
           with:
             version: 2.24.3
+            platform: macOS
         - run: |
             gh version
    ```
