@@ -5,6 +5,9 @@ inputs:
   version: 
     required: false
     description: 'gh cli version to download'
+  platform: 
+    required: false
+    description: 'gh cli binary platform to download'
 runs:
   using: 'node16'
   main: 'dist/index.js'
