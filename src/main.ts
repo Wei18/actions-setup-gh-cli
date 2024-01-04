@@ -26,7 +26,13 @@ async function install(): Promise<void> {
   const version = core.getInput('version') || (await getLatestVersion())
 
   const platform = core.getInput('platform') || os.platform()
-  const packageUrl = `https://github.com/cli/cli/releases/download/v${version}/gh_${version}_${platform}_amd64.tar.gz`
+
+  const arch = core.getInput('arch') || os.arch()
+
+  const architecture =
+    arch === 'x64' ? 'amd64' : arch === 'arm64' ? 'arm64' : 'amd64'
+
+  const packageUrl = `https://github.com/cli/cli/releases/download/v${version}/gh_${version}_${platform}_${architecture}.tar.gz`
 
   core.info(`Downloading gh cli from ${packageUrl}`)
 
@@ -37,7 +43,7 @@ async function install(): Promise<void> {
     chmodSync(downloadPath, '755')
     cliPath = await extractTar(downloadPath, find(GH_CLI_TOOL_NAME, version))
     cliPath = await cacheFile(
-      `${cliPath}/gh_${version}_${platform}_amd64/bin/gh`,
+      `${cliPath}/gh_${version}_${platform}_${architecture}/bin/gh`,
       'gh',
       GH_CLI_TOOL_NAME,
       version
