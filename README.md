@@ -1,21 +1,27 @@
 # Setup gh cli action
 
-This repo contains the github actions for installing gh cli in self hosted runners. The gh cli is available in the github hosted cloud runners. In self hosted runners, if you want to use the gh cli, you can use this action to install the gh cli. 
+This repository contains the GitHub Actions for installing the GitHub CLI in
+self-hosted runners. While the GitHub CLI is readily available in the
+GitHub-hosted cloud runners, in self-hosted runners, this action enables the
+installation of the GitHub CLI.
 
 ## Usage
 
-To install the gh cli, use the actions as below:
+To install the GitHub CLI, use the action as shown below:
 
-   ```yaml
-    build:
-      runs-on: [self-hosted]
-      steps:
-        - uses: actions/checkout@v2
-        - name: Install the gh cli
-          uses: Wei18/actions-setup-gh-cli@1.0.1
-          with:
-            version: 2.24.3
-            platform: macOS
-        - run: |
-            gh version
-   ```
+```yaml
+build:
+  runs-on: [self-hosted]
+  steps:
+    - uses: actions/checkout@v2
+    - name: Install the GitHub CLI
+      uses: emasphere/actions-setup-gh-cli@v3
+      with:
+        version: 2.24.3
+        # Optional: Specify the platform (linux, macos or windows). If not specified, the platform is automatically detected.
+        platform: macOS
+        # Optional: Specify the architecture (amd64 or arm64). If not specified, the system architecture is automatically detected.
+        arch: amd64
+    - run: |
+        gh version
+```
